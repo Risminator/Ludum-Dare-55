@@ -2,12 +2,12 @@ extends CharacterBody2D
 
 @export var speed = 150
 
-@onready var player = $/root/Level/Player
+var player = null
 
 func die():
 	queue_free()
 	Events.enemy_killed.emit()
-	if Global.kills % 1 == 0:
+	if Global.kills % 3 == 0:
 		const SKULL = preload("res://scenes/skull_collectible.tscn")
 		var new_skull = SKULL.instantiate()
 		new_skull.global_position = global_position
