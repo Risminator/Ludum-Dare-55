@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cdyu15csyydvg"]
 
-[ext_resource type="Texture2D" uid="uid://bpaxfqx6ji7k1" path="res://assets/temp/Yellow.png" id="1_7e2uf"]
+[ext_resource type="Texture2D" uid="uid://da51b647hob47" path="res://assets/temp/Yellow.png" id="1_7e2uf"]
 [ext_resource type="PackedScene" uid="uid://bj6u3bignl25" path="res://scenes/player/player.tscn" id="1_omn7p"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_r5kd6"]
-[ext_resource type="PackedScene" uid="uid://cm8583wnpxaev" path="res://scenes/skull_collectible.tscn" id="3_f4pg5"]
+[ext_resource type="PackedScene" uid="uid://cpvm2l4fpwxqn" path="res://scenes/skull_collectible.tscn" id="3_f4pg5"]
 [ext_resource type="PackedScene" uid="uid://8kbxgl72wi26" path="res://scenes/enemies/wolf.tscn" id="4_xh21e"]
 
 [sub_resource type="Curve2D" id="Curve2D_e7x1q"]

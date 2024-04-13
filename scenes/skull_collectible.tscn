@@ -1,19 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm8583wnpxaev"]
+[gd_scene load_steps=5 format=3 uid="uid://cpvm2l4fpwxqn"]
 
-[ext_resource type="Texture2D" uid="uid://bocnytccefn6u" path="res://assets/skull.png" id="1_iwe3t"]
+[ext_resource type="Texture2D" uid="uid://bhkogjs7kdpd4" path="res://assets/skull.png" id="1_iwe3t"]
 [ext_resource type="Script" path="res://scripts/skull_collectible.gd" id="1_t71ag"]
+[ext_resource type="Texture2D" uid="uid://b6i473w7xadop" path="res://assets/projectiles.png" id="3_a5xqj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ajo5"]
-radius = 18.0278
+radius = 12.0
 
 [node name="SkullCollectible" type="Area2D"]
 script = ExtResource("1_t71ag")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.705882, 0.768627, 0.745098, 1)
+texture_filter = 1
 position = Vector2(1, 0)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_iwe3t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6ajo5")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-225, -1)
+color = Color(0.803922, 0.647059, 0.764706, 1)
+texture = ExtResource("3_a5xqj")
+texture_scale = 4.94
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
