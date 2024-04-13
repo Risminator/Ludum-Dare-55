@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bhkogjs7kdpd4" path="res://assets/skull.png" id="1_iwe3t"]
 [ext_resource type="Script" path="res://scripts/skull_collectible.gd" id="1_t71ag"]
-[ext_resource type="Texture2D" uid="uid://b6i473w7xadop" path="res://assets/projectiles.png" id="3_a5xqj"]
+[ext_resource type="Texture2D" uid="uid://dfi6jmu7qnect" path="res://assets/light.png" id="3_6gsaf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ajo5"]
 radius = 12.0
@@ -21,9 +21,8 @@ texture = ExtResource("1_iwe3t")
 shape = SubResource("CircleShape2D_6ajo5")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-225, -1)
-color = Color(0.803922, 0.647059, 0.764706, 1)
-texture = ExtResource("3_a5xqj")
-texture_scale = 4.94
+color = Color(0.937255, 0.733333, 0.266667, 1)
+texture = ExtResource("3_6gsaf")
+texture_scale = 0.4
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
