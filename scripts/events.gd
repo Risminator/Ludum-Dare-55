@@ -1,8 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bla6ee58tw386"]
+extends Node
 
-[sub_resource type="GDScript" id="GDScript_4c3qj"]
-script/source = "extends Node
-
+signal skull_collected
+signal familiar_lost(position)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +11,3 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-"
-
-[node name="Placeholder" type="Node2D"]
-script = SubResource("GDScript_4c3qj")

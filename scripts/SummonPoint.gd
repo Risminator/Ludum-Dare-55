@@ -3,6 +3,7 @@ extends Marker2D
 @export var summon_position = 0
 @export var rotation_rate = 0.05
 @export var distance = 100
+var is_free = true
 
 var point = Vector2(0, 0)
 

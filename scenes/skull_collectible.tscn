@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm8583wnpxaev"]
+
+[ext_resource type="Texture2D" uid="uid://bocnytccefn6u" path="res://assets/skull.png" id="1_iwe3t"]
+[ext_resource type="Script" path="res://scripts/skull_collectible.gd" id="1_t71ag"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ajo5"]
+radius = 18.0278
+
+[node name="SkullCollectible" type="Area2D"]
+script = ExtResource("1_t71ag")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("1_iwe3t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6ajo5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
