@@ -7,8 +7,7 @@ extends CharacterBody2D
 func die():
 	queue_free()
 	Events.enemy_killed.emit()
-	print(Global.kills)
-	if Global.kills % 5 == 0:
+	if Global.kills % 1 == 0:
 		const SKULL = preload("res://scenes/skull_collectible.tscn")
 		var new_skull = SKULL.instantiate()
 		new_skull.global_position = global_position

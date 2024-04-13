@@ -39,6 +39,7 @@ script = ExtResource("1_1wx1u")
 shape = SubResource("CapsuleShape2D_aufn0")
 
 [node name="Summons" type="Marker2D" parent="."]
+unique_name_in_owner = true
 z_index = 1
 script = ExtResource("2_8kfk1")
 
@@ -68,6 +69,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="Circle" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 z_index = -1
 position = Vector2(-4, 0)

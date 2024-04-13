@@ -3,7 +3,20 @@ extends CharacterBody2D
 @export var speed = 200
 @export var norm = 4
 var mouse_pos = null
+var demon = null
 
+func level_up():
+	if demon != null:
+		demon.level_up()
+	else:
+		const DEMON = preload("res://scenes/player/demon.tscn")
+		var new_demon = DEMON.instantiate()
+		new_demon.master = self
+		print(new_demon.name)
+		add_child(new_demon)
+		demon = new_demon
+	var tween = create_tween()
+	tween.tween_property(%Circle, "modulate", Color.hex(0xffffff00), 1)
 
 func _physics_process(delta):
 	velocity = Vector2(0,0)
@@ -19,4 +32,8 @@ func _physics_process(delta):
 
 
 func _on_summons_ritual_ready():
-	pass # Replace with function body.
+	%Summons.clear_familiars()
+	%Summons.add_familiar()
+	var tween = create_tween()
+	tween.tween_property(%Circle, "modulate", Color.hex(0xffffffff), 1)
+	level_up()

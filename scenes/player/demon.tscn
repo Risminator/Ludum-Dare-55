@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://yvy3qjjti7es"]
+
+[ext_resource type="Texture2D" uid="uid://cbj320mfvteeh" path="res://assets/familiar1.png" id="1_1k0ht"]
+[ext_resource type="Script" path="res://scripts/demon.gd" id="1_sgbw1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ul6wy"]
+radius = 12.0
+height = 36.0
+
+[node name="Demon" type="CharacterBody2D"]
+top_level = true
+texture_filter = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_sgbw1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1k0ht")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-1, 3)
+shape = SubResource("CapsuleShape2D_ul6wy")
