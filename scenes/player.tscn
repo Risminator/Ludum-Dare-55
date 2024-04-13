@@ -1,8 +1,58 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj6u3bignl25"]
+[gd_scene load_steps=6 format=3 uid="uid://bj6u3bignl25"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_1wx1u"]
+[ext_resource type="Texture2D" uid="uid://y7pm5w5ap6fl" path="res://assets/character.png" id="1_4r51u"]
+[ext_resource type="Texture2D" uid="uid://bocnytccefn6u" path="res://assets/skull.png" id="1_s63gj"]
+[ext_resource type="Script" path="res://scenes/SummonPoint.gd" id="2_ctnfr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aufn0"]
+radius = 13.0
+height = 80.0
 
 [node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_1wx1u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_aufn0")
+
+[node name="Summons" type="Marker2D" parent="."]
+
+[node name="SummonPoint" type="Marker2D" parent="Summons"]
+script = ExtResource("2_ctnfr")
+
+[node name="Familiar" type="Sprite2D" parent="Summons/SummonPoint"]
+texture = ExtResource("1_s63gj")
+
+[node name="SummonPoint2" type="Marker2D" parent="Summons"]
+script = ExtResource("2_ctnfr")
+summon_position = 1
+
+[node name="Familiar" type="Sprite2D" parent="Summons/SummonPoint2"]
+texture = ExtResource("1_s63gj")
+
+[node name="SummonPoint3" type="Marker2D" parent="Summons"]
+script = ExtResource("2_ctnfr")
+summon_position = 2
+
+[node name="Familiar" type="Sprite2D" parent="Summons/SummonPoint3"]
+texture = ExtResource("1_s63gj")
+
+[node name="SummonPoint4" type="Marker2D" parent="Summons"]
+script = ExtResource("2_ctnfr")
+summon_position = 3
+
+[node name="Familiar" type="Sprite2D" parent="Summons/SummonPoint4"]
+texture = ExtResource("1_s63gj")
+
+[node name="SummonPoint5" type="Marker2D" parent="Summons"]
+script = ExtResource("2_ctnfr")
+summon_position = 4
+
+[node name="Familiar" type="Sprite2D" parent="Summons/SummonPoint5"]
+texture = ExtResource("1_s63gj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4, 0)
+texture = ExtResource("1_4r51u")
+hframes = 3
