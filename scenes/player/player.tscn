@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1wx1u"]
 [ext_resource type="Texture2D" uid="uid://y7pm5w5ap6fl" path="res://assets/character.png" id="1_4r51u"]
-[ext_resource type="Texture2D" uid="uid://bhkogjs7kdpd4" path="res://assets/skull.png" id="1_s63gj"]
 [ext_resource type="Script" path="res://scripts/Summons.gd" id="2_8kfk1"]
-[ext_resource type="PackedScene" uid="uid://rdsjai3y0dqq" path="res://scenes/summon_point.tscn" id="2_wu4ca"]
-[ext_resource type="Texture2D" uid="uid://bqx3xmjtv4oh5" path="res://assets/circle.png" id="5_bn4cn"]
+[ext_resource type="PackedScene" uid="uid://rdsjai3y0dqq" path="res://scenes/player/summon_point.tscn" id="2_wu4ca"]
+[ext_resource type="Texture2D" uid="uid://dnyiuvy6cvsfc" path="res://assets/circle.png" id="5_bn4cn"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aufn0"]
 radius = 13.0
 height = 80.0
@@ -39,6 +39,7 @@ script = ExtResource("1_1wx1u")
 shape = SubResource("CapsuleShape2D_aufn0")
 
 [node name="Summons" type="Marker2D" parent="."]
+z_index = 1
 script = ExtResource("2_8kfk1")
 
 [node name="SummonPoint" parent="Summons" instance=ExtResource("2_wu4ca")]
@@ -56,16 +57,29 @@ summon_position = 3
 summon_position = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4, 0)
+position = Vector2(-17.97, 0)
 texture = ExtResource("1_4r51u")
 hframes = 3
-
-[node name="Circle" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(10, 10)
-texture = ExtResource("5_bn4cn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_rlf31")
 }
 autoplay = "idle"
+
+[node name="Circle" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+position = Vector2(-4, 0)
+scale = Vector2(0.810606, 0.810606)
+texture = ExtResource("5_bn4cn")
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+modulate = Color(0.662745, 0.0196078, 0, 1)
+shape = SubResource("CapsuleShape2D_aufn0")
+
+[connection signal="ritual_ready" from="Summons" to="." method="_on_summons_ritual_ready"]

@@ -1,12 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3ek44meuf26"]
+[gd_scene load_steps=7 format=3 uid="uid://cdyu15csyydvg"]
 
 [ext_resource type="Texture2D" uid="uid://bpaxfqx6ji7k1" path="res://assets/temp/Yellow.png" id="1_7e2uf"]
-[ext_resource type="PackedScene" uid="uid://bj6u3bignl25" path="res://scenes/player.tscn" id="1_omn7p"]
+[ext_resource type="PackedScene" uid="uid://bj6u3bignl25" path="res://scenes/player/player.tscn" id="1_omn7p"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_r5kd6"]
+[ext_resource type="PackedScene" uid="uid://cm8583wnpxaev" path="res://scenes/skull_collectible.tscn" id="3_f4pg5"]
+[ext_resource type="PackedScene" uid="uid://8kbxgl72wi26" path="res://scenes/enemies/wolf.tscn" id="4_xh21e"]
+
+[sub_resource type="Curve2D" id="Curve2D_e7x1q"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -55, -66, 0, 0, 0, 0, 706, -82, 0, 0, 0, 0, 721, 427, 0, 0, 0, 0, -69, 411, 0, 0, 0, 0, -53, -67)
+}
+point_count = 5
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_r5kd6")
 
 [node name="Player" parent="." instance=ExtResource("1_omn7p")]
-position = Vector2(266, 164)
+position = Vector2(326, 174)
+collision_mask = 8
+speed = 400
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -19,3 +31,30 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_7e2uf")
 stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.160784, 0.223529, 0.427451, 1)
+
+[node name="SkullCollectible" parent="." instance=ExtResource("3_f4pg5")]
+position = Vector2(174, 216)
+
+[node name="Wolf" parent="." instance=ExtResource("4_xh21e")]
+position = Vector2(158, 315)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_e7x1q")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(-55, -66)
+rotation = -0.0210219
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

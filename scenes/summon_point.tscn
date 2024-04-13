@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://rdsjai3y0dqq"]
-
-[ext_resource type="Script" path="res://scripts/SummonPoint.gd" id="1_sryjs"]
-
-[node name="SummonPoint" type="Marker2D"]
-script = ExtResource("1_sryjs")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://j3xdogar7st8"]
+
+[ext_resource type="Texture2D" uid="uid://b7p87j5e02nhf" path="res://assets/familiar2.png" id="1_2nxwa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y61kv"]
+radius = 25.02
+
+[node name="Area2D" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Familiar" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -3)
+texture = ExtResource("1_2nxwa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y61kv")
+
+[node name="player_weapon" type="Node" parent="."]

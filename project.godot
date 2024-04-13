@@ -36,6 +36,13 @@ project/assembly_name="Ludum-Dare-55"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Familiars"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Collectibles"
+
 [rendering]
 
 renderer/rendering_method="mobile"
