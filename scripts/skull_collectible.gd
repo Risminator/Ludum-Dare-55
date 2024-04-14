@@ -1,11 +1,18 @@
 extends Area2D
 
+@export var time_to_live = 5
 @onready var timer: Timer = $Lifetime
 
+func _ready():
+	if time_to_live > 0:
+		timer.wait_time = time_to_live
+		timer.start()
+
 func _physics_process(delta):
-	var percent = timer.time_left / timer.wait_time
-	var alpha = roundi(0xff * percent)
-	modulate = Color.hex(0xffffff00 + alpha)
+	if time_to_live > 0:
+		var percent = timer.time_left / timer.wait_time
+		var alpha = roundi(0xff * percent)
+		modulate = Color.hex(0xffffff00 + alpha)
 	
 
 func _on_body_entered(body):

@@ -57,7 +57,6 @@ texture = ExtResource("2_yybcs")
 shape = SubResource("CircleShape2D_y61kv")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-scale = Vector2(1, 1)
 texture = ExtResource("3_ii0cn")
 hframes = 10
 frame = 9

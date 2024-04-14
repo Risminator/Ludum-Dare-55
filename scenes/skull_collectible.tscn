@@ -27,7 +27,6 @@ texture_scale = 0.4
 
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

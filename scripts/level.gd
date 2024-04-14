@@ -2,6 +2,7 @@ extends Node
 
 @onready var player = $Player
 @onready var parallax = $ParallaxBackground
+@onready var cameraRemote = $Player/RemoteTransform2D
 
 const WOLF = preload("res://scenes/enemies/wolf.tscn")	
 const CRUSADER = preload("res://scenes/enemies/crusader.tscn")
@@ -12,8 +13,10 @@ var MOBS = [
 ]
 
 var need_skulls = false
+var can_spawn = false
 
 func _ready():
+	Events.connect("start_game", _on_Events_start_game)
 	Events.connect("skulls_lost", _on_Events_skulls_lost)
 	Events.connect("skull_collected", _on_Events_skull_collected)
 	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
@@ -42,8 +45,12 @@ func _process(delta):
 		parallax.scroll_offset += direction * player.speed * delta
 
 func _on_timer_timeout():
-	if player != null:
+	if can_spawn and player != null:
 		spawn_enemy()
+
+func _on_Events_start_game():
+	can_spawn = true
+	cameraRemote.update_position = true
 
 func _on_Events_skulls_lost():
 	need_skulls = true

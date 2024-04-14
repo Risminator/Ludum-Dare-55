@@ -148,7 +148,7 @@ position = Vector2(59.4917, 81.8474)
 summon_position = 3
 
 [node name="SummonPoint5" parent="Summons" instance=ExtResource("2_wu4ca")]
-position = Vector2(91.7583, -32.6389)
+position = Vector2(91.7584, -32.6389)
 summon_position = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

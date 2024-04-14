@@ -1,10 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdyu15csyydvg"]
+[gd_scene load_steps=10 format=3 uid="uid://cdyu15csyydvg"]
 
 [ext_resource type="PackedScene" uid="uid://bj6u3bignl25" path="res://scenes/player/player.tscn" id="1_omn7p"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_r5kd6"]
 [ext_resource type="PackedScene" uid="uid://cpvm2l4fpwxqn" path="res://scenes/skull_collectible.tscn" id="3_f4pg5"]
-[ext_resource type="Texture2D" uid="uid://cwkw4d1o8aob8" path="res://assets/pol.png" id="3_kx5p2"]
-[ext_resource type="AudioStream" uid="uid://cku2cdq8nj4ke" path="res://assets/Truth of the Legend.mp3" id="5_pxkg5"]
+[ext_resource type="Texture2D" uid="uid://bxq3pxd3jguws" path="res://assets/pol.png" id="3_kx5p2"]
+[ext_resource type="Texture2D" uid="uid://b5o026m42l52n" path="res://assets/particles.png" id="5_1rlc6"]
+[ext_resource type="AudioStream" uid="uid://cftyuq8d04kqg" path="res://assets/Truth of the Legend.mp3" id="5_pxkg5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k45cr"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6t1sn"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(15, 1, 1)
+gravity = Vector3(0, -20, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [sub_resource type="Curve2D" id="Curve2D_e7x1q"]
 _data = {
@@ -33,12 +48,27 @@ speed = 400
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+update_position = false
+update_rotation = false
+update_scale = false
 
 [node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Path2D")
+update_rotation = false
+update_scale = false
 
 [node name="SkullCollectible" parent="." instance=ExtResource("3_f4pg5")]
 position = Vector2(174, 216)
+time_to_live = 0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SkullCollectible"]
+modulate = Color(0.635294, 0.952941, 0, 1)
+material = SubResource("CanvasItemMaterial_k45cr")
+scale = Vector2(0.7, 0.7)
+amount = 20
+amount_ratio = 0.3
+process_material = SubResource("ParticleProcessMaterial_6t1sn")
+texture = ExtResource("5_1rlc6")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
@@ -55,6 +85,7 @@ curve = SubResource("Curve2D_e7x1q")
 unique_name_in_owner = true
 position = Vector2(-545, -368)
 rotation = -0.00440914
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_pxkg5")
 autoplay = true
