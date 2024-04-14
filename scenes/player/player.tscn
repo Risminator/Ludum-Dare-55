@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bj6u3bignl25"]
+[gd_scene load_steps=13 format=3 uid="uid://bj6u3bignl25"]
 
-[ext_resource type="Texture2D" uid="uid://y7pm5w5ap6fl" path="res://assets/character.png" id="1_4r51u"]
+[ext_resource type="Texture2D" uid="uid://biyi01ntewb5l" path="res://assets/character.png" id="1_4r51u"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_emhx0"]
 [ext_resource type="Script" path="res://scripts/player/Summons.gd" id="2_0dusb"]
 [ext_resource type="PackedScene" uid="uid://rdsjai3y0dqq" path="res://scenes/player/summon_point.tscn" id="2_wu4ca"]
-[ext_resource type="Texture2D" uid="uid://dnyiuvy6cvsfc" path="res://assets/circle.png" id="5_bn4cn"]
-[ext_resource type="Texture2D" uid="uid://b5o026m42l52n" path="res://assets/particles.png" id="5_nmird"]
+[ext_resource type="Texture2D" uid="uid://dfi6jmu7qnect" path="res://assets/light.png" id="3_huawc"]
+[ext_resource type="Texture2D" uid="uid://bocmcnm4j4e3e" path="res://assets/circle.png" id="5_bn4cn"]
+[ext_resource type="Texture2D" uid="uid://dgyv7di2mf4ek" path="res://assets/particles.png" id="5_nmird"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aufn0"]
 radius = 13.0
@@ -51,6 +52,51 @@ texture_filter = 1
 collision_mask = 8
 script = ExtResource("1_emhx0")
 
+[node name="Circle" type="Sprite2D" parent="."]
+modulate = Color(0.45098, 0.360784, 0.282353, 1)
+scale = Vector2(0.8, 0.784)
+texture = ExtResource("5_bn4cn")
+
+[node name="PointLight2D" type="PointLight2D" parent="Circle"]
+texture_filter = 1
+position = Vector2(-2.5, -125)
+scale = Vector2(0.3, 0.3)
+color = Color(0.823529, 0.419608, 0.380392, 1)
+energy = 3.83
+texture = ExtResource("3_huawc")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Circle"]
+texture_filter = 1
+position = Vector2(-120, -40.8163)
+scale = Vector2(0.3, 0.3)
+color = Color(0.823529, 0.419608, 0.380392, 1)
+energy = 3.83
+texture = ExtResource("3_huawc")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Circle"]
+texture_filter = 1
+position = Vector2(-75, 103.316)
+scale = Vector2(0.3, 0.3)
+color = Color(0.823529, 0.419608, 0.380392, 1)
+energy = 3.83
+texture = ExtResource("3_huawc")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Circle"]
+texture_filter = 1
+position = Vector2(73.75, 103.316)
+scale = Vector2(0.3, 0.3)
+color = Color(0.823529, 0.419608, 0.380392, 1)
+energy = 3.83
+texture = ExtResource("3_huawc")
+
+[node name="PointLight2D5" type="PointLight2D" parent="Circle"]
+texture_filter = 1
+position = Vector2(113.75, -42.0918)
+scale = Vector2(0.3, 0.3)
+color = Color(0.823529, 0.419608, 0.380392, 1)
+energy = 3.83
+texture = ExtResource("3_huawc")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_aufn0")
 
@@ -92,14 +138,6 @@ scale = Vector2(0.7, 0.7)
 amount_ratio = 0.3
 process_material = SubResource("ParticleProcessMaterial_x66db")
 texture = ExtResource("5_nmird")
-
-[node name="Circle" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0)
-z_index = -1
-position = Vector2(-4, 0)
-scale = Vector2(0.810606, 0.810606)
-texture = ExtResource("5_bn4cn")
 
 [node name="HurtBox" type="Area2D" parent="."]
 unique_name_in_owner = true
