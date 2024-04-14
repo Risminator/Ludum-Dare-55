@@ -5,6 +5,7 @@ extends CharacterBody2D
 var mouse_pos = null
 var demon = null
 
+
 func level_up():
 	if demon != null:
 		demon.level_up()
@@ -21,6 +22,8 @@ func level_up():
 func _physics_process(delta):
 	velocity = Vector2(0,0)
 	mouse_pos = get_global_mouse_position()
+	
+	
 	if abs(mouse_pos - position) > Vector2(norm,norm):
 		var direction = (mouse_pos - position).normalized()
 		velocity = direction * speed

@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://bj6u3bignl25"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_1wx1u"]
-[ext_resource type="Texture2D" uid="uid://biyi01ntewb5l" path="res://assets/character.png" id="1_4r51u"]
-[ext_resource type="Script" path="res://scripts/Summons.gd" id="2_8kfk1"]
+[ext_resource type="Texture2D" uid="uid://y7pm5w5ap6fl" path="res://assets/character.png" id="1_4r51u"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_emhx0"]
+[ext_resource type="Script" path="res://scripts/player/Summons.gd" id="2_0dusb"]
 [ext_resource type="PackedScene" uid="uid://rdsjai3y0dqq" path="res://scenes/player/summon_point.tscn" id="2_wu4ca"]
-[ext_resource type="Texture2D" uid="uid://bqx3xmjtv4oh5" path="res://assets/circle.png" id="5_bn4cn"]
-[ext_resource type="Texture2D" uid="uid://dgyv7di2mf4ek" path="res://assets/particles.png" id="5_nmird"]
+[ext_resource type="Texture2D" uid="uid://dnyiuvy6cvsfc" path="res://assets/circle.png" id="5_bn4cn"]
+[ext_resource type="Texture2D" uid="uid://b5o026m42l52n" path="res://assets/particles.png" id="5_nmird"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aufn0"]
 radius = 13.0
@@ -48,7 +48,8 @@ anim_speed_max = 1.0
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
-script = ExtResource("1_1wx1u")
+collision_mask = 8
+script = ExtResource("1_emhx0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_aufn0")
@@ -56,7 +57,7 @@ shape = SubResource("CapsuleShape2D_aufn0")
 [node name="Summons" type="Marker2D" parent="."]
 unique_name_in_owner = true
 z_index = 1
-script = ExtResource("2_8kfk1")
+script = ExtResource("2_0dusb")
 
 [node name="SummonPoint" parent="Summons" instance=ExtResource("2_wu4ca")]
 
@@ -107,5 +108,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 modulate = Color(0.662745, 0.0196078, 0, 1)
 shape = SubResource("CapsuleShape2D_aufn0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
 
 [connection signal="ritual_ready" from="Summons" to="." method="_on_summons_ritual_ready"]

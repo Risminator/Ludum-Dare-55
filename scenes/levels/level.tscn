@@ -2,47 +2,45 @@
 
 [ext_resource type="PackedScene" uid="uid://bj6u3bignl25" path="res://scenes/player/player.tscn" id="1_omn7p"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_r5kd6"]
-[ext_resource type="PackedScene" uid="uid://cm8583wnpxaev" path="res://scenes/skull_collectible.tscn" id="3_f4pg5"]
-[ext_resource type="Texture2D" uid="uid://cwkw4d1o8aob8" path="res://assets/pol.png" id="3_kx5p2"]
+[ext_resource type="PackedScene" uid="uid://cpvm2l4fpwxqn" path="res://scenes/skull_collectible.tscn" id="3_f4pg5"]
+[ext_resource type="Texture2D" uid="uid://bxq3pxd3jguws" path="res://assets/pol.png" id="3_kx5p2"]
 
 [sub_resource type="Curve2D" id="Curve2D_e7x1q"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -55, -66, 0, 0, 0, 0, 706, -82, 0, 0, 0, 0, 721, 427, 0, 0, 0, 0, -69, 411, 0, 0, 0, 0, -53, -67)
+"points": PackedVector2Array(0, 0, 0, 0, -174, -166, 0, 0, 0, 0, 851, -106, 0, 0, 0, 0, 844, 446, 0, 0, 0, 0, -198, 438, 0, 0, 0, 0, -172, -163)
 }
 point_count = 5
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node"]
 script = ExtResource("1_r5kd6")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(327, 175)
+motion_mirroring = Vector2(1280, 720)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(0.862745, 0.862745, 0.862745, 1)
+texture_filter = 1
+texture = ExtResource("3_kx5p2")
+centered = false
 
 [node name="Player" parent="." instance=ExtResource("1_omn7p")]
 position = Vector2(326, 174)
-collision_mask = 8
 speed = 400
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-326, -174)
+curve = SubResource("Curve2D_e7x1q")
 
-[node name="Background" type="TextureRect" parent="CanvasLayer"]
-modulate = Color(0.266667, 0.596078, 0.760784, 0.764706)
-texture_filter = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_kx5p2")
-stretch_mode = 1
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
+unique_name_in_owner = true
+position = Vector2(-174, -166)
+rotation = 0.0584699
 
 [node name="SkullCollectible" parent="." instance=ExtResource("3_f4pg5")]
 position = Vector2(174, 216)
-
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_e7x1q")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-unique_name_in_owner = true
-position = Vector2(-55, -66)
-rotation = -0.0210219
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
