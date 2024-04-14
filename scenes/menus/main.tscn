@@ -1,14 +1,71 @@
-[gd_scene load_steps=4 format=3 uid="uid://bexejtnd01sgx"]
+[gd_scene load_steps=23 format=3 uid="uid://bexejtnd01sgx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_s8v03"]
-[ext_resource type="Texture2D" uid="uid://nwhgh1y8eeoo" path="res://assets/sprite.png" id="2_rf785"]
+[ext_resource type="Texture2D" uid="uid://dnl7njn4gtbn1" path="res://assets/temp/ani1.png" id="2_2kmh3"]
 [ext_resource type="Texture2D" uid="uid://cxsmm3a8pm30h" path="res://assets/temp/temp_logo.png" id="3_djq28"]
+[ext_resource type="Texture2D" uid="uid://ddq5e4vm4nouj" path="res://assets/temp/ani2.png" id="3_tcoho"]
+[ext_resource type="Texture2D" uid="uid://d2nvto2nqnbnn" path="res://assets/temp/ani11.png" id="4_l651s"]
+[ext_resource type="AudioStream" uid="uid://duu1h2yeubqb1" path="res://assets/Kevin MacLeod - Brittle Rille Reunited (Calm).mp3" id="4_yx1pe"]
+[ext_resource type="Texture2D" uid="uid://g3m4bwgj3q1e" path="res://assets/temp/ani12.png" id="5_yii0k"]
+[ext_resource type="Texture2D" uid="uid://ddbtotuvsbkru" path="res://assets/temp/ani13.png" id="6_q6q2p"]
+[ext_resource type="Texture2D" uid="uid://dluibphgvgiy2" path="res://assets/temp/ani14.png" id="7_30g60"]
+[ext_resource type="Texture2D" uid="uid://dxvfpsqu5jdgm" path="res://assets/temp/ani15.png" id="8_yuprl"]
+[ext_resource type="Texture2D" uid="uid://ctqvr0id1kac8" path="res://assets/temp/ani16.png" id="9_hf14r"]
+[ext_resource type="Texture2D" uid="uid://dridydj7f0mhd" path="res://assets/temp/ani17.png" id="10_h7th0"]
+[ext_resource type="Texture2D" uid="uid://biinn1rqyovvp" path="res://assets/temp/ani3.png" id="11_mll0j"]
+[ext_resource type="Texture2D" uid="uid://bw1pby4jwykx8" path="res://assets/temp/ani4.png" id="12_eg3fi"]
+[ext_resource type="Texture2D" uid="uid://cvcfg74iqt214" path="res://assets/temp/ani5.png" id="13_4qa4q"]
+[ext_resource type="Texture2D" uid="uid://b45p1ryhj58vq" path="res://assets/temp/ani6.png" id="14_ieqsr"]
+[ext_resource type="Texture2D" uid="uid://c0iufl0gc3gt5" path="res://assets/temp/ani7.png" id="15_wuwlf"]
+[ext_resource type="Texture2D" uid="uid://crfcqudg4kr1" path="res://assets/temp/ani8.png" id="16_h4tuk"]
+[ext_resource type="Texture2D" uid="uid://fubmwwqs3831" path="res://assets/temp/ani9.png" id="17_0oea7"]
+[ext_resource type="Texture2D" uid="uid://d2k7e8qfb8152" path="res://assets/temp/ani10.png" id="18_4bu3n"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nhuk2"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_mxd2r"]
+frames = 17
+speed_scale = 10.0
+frame_0/texture = ExtResource("2_2kmh3")
+frame_1/texture = ExtResource("3_tcoho")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("11_mll0j")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("12_eg3fi")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("13_4qa4q")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("14_ieqsr")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("15_wuwlf")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("16_h4tuk")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("17_0oea7")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("18_4bu3n")
+frame_9/duration = 1.0
+frame_10/texture = ExtResource("4_l651s")
+frame_10/duration = 1.0
+frame_11/texture = ExtResource("5_yii0k")
+frame_11/duration = 1.0
+frame_12/texture = ExtResource("6_q6q2p")
+frame_12/duration = 1.0
+frame_13/texture = ExtResource("7_30g60")
+frame_13/duration = 1.0
+frame_14/texture = ExtResource("8_yuprl")
+frame_14/duration = 1.0
+frame_15/texture = ExtResource("9_hf14r")
+frame_15/duration = 1.0
+frame_16/texture = ExtResource("10_h7th0")
+frame_16/duration = 1.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_s8v03")
 
 [node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_nhuk2")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,9 +77,8 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.357792
 scale = Vector2(2, 2)
-texture = ExtResource("2_rf785")
+texture = SubResource("AnimatedTexture_mxd2r")
 stretch_mode = 1
-flip_v = true
 
 [node name="Logo" type="TextureRect" parent="."]
 texture_filter = 1
@@ -84,6 +140,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Exit"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_yx1pe")
+autoplay = true
 
 [connection signal="pressed" from="BtnStart" to="." method="_on_btn_start_pressed"]
 [connection signal="pressed" from="BtnOptions" to="." method="_on_btn_options_pressed"]
