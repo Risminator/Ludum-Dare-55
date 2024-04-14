@@ -3,6 +3,8 @@ extends Node
 @onready var player = $Player
 @onready var parallax = $ParallaxBackground
 @onready var cameraRemote = $Player/RemoteTransform2D
+@onready var game_over_menu = $CanvasLayer
+
 
 var scroll_direction = Vector2(0, 1)
 
@@ -20,6 +22,7 @@ var MOBS = [
 
 var need_skulls = false
 var can_spawn = false
+
 
 func _ready():
 	Events.connect("start_game", _on_Events_start_game)
@@ -74,6 +77,8 @@ func _on_Events_LEVEL_FIRST():
 func _on_Events_game_over():
 	can_spawn = false
 	cameraRemote.update_position = false
+	game_over_menu.visible = true
+	get_tree().paused = true
 	
 func _on_Events_enemy_killed():
 	spawned_mobs -= 1

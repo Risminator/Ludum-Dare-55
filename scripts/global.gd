@@ -29,3 +29,8 @@ func _on_Events_enemy_killed():
 	
 func can_spawn_skull():
 	return kills % skull_rate == 0
+	
+func reset():
+	kills = 0
+	skulls_collected = 0
+	skull_rate = 3

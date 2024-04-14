@@ -14,7 +14,6 @@ func _on_btn_start_pressed():
 
 
 func _on_btn_options_pressed():
-	#Global.set_scene(Global.SCENES.OPTIONS)
 	pass
 
 
