@@ -79,6 +79,7 @@ func _on_Events_skull_collected():
 func _on_Events_LEVEL_FIRST():
 	MOBS.append(CRUSADER)
 	max_mobs += 5
+	Global.skull_rate = 2
 
 func _on_Events_LEVEL_SECOND():
 	dash_tip.visible = true
