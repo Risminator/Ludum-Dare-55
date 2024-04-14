@@ -21,10 +21,13 @@ func add_familiar():
 
 func lose_familiar(familiar):
 	var slot = familiar.get_parent()
-	slot.remove_child(familiar)
-	familiar.queue_free()
-	slot.is_free = true
-	familiars -= 1
+	if slot != null:
+		slot.remove_child(familiar)
+		familiar.queue_free()
+		slot.is_free = true
+		familiars -= 1
+		if familiars == 0:
+			Events.skulls_lost.emit()
 		
 func clear_familiars():
 	for slot: Marker2D in summon_points:

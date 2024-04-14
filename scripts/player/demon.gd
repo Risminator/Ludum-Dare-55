@@ -28,4 +28,4 @@ func level_up():
 		5:
 			Events.LEVEL_FIFTH.emit()
 	scale += Vector2(0.1, 0.1)
-	print("Я вырос!")
+	print("I grew up ", level)

@@ -1,6 +1,7 @@
 extends Node
 
 signal skull_collected
+signal skulls_lost
 signal familiar_lost(familiar)
 signal enemy_killed
 

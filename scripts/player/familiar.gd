@@ -1,6 +1,10 @@
 extends Area2D
 
 @onready var summon_point = get_parent()
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+func _ready():
+	animation_player.play("spawn")
 
 func die():
 	Events.familiar_lost.emit(self)

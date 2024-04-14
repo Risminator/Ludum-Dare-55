@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-@export var speed = 300
+@export var speed = 325
 
 var player = null
 
 func die():
 	queue_free()
 	Events.enemy_killed.emit()
-	if Global.kills % 1 == 0:
+	if Global.can_spawn_skull():
 		const SKULL = preload("res://scenes/skull_collectible.tscn")
 		var new_skull = SKULL.instantiate()
 		new_skull.global_position = global_position

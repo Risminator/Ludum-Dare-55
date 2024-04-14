@@ -5,18 +5,34 @@ extends Node
 
 const WOLF = preload("res://scenes/enemies/wolf.tscn")	
 const CRUSADER = preload("res://scenes/enemies/crusader.tscn")
+const SKULL = preload("res://scenes/skull_collectible.tscn")
 
-const MOBS = [
-	WOLF,
-	CRUSADER
+var MOBS = [
+	WOLF
 ]
 
+var need_skulls = false
+
+func _ready():
+	Events.connect("skulls_lost", _on_Events_skulls_lost)
+	Events.connect("skull_collected", _on_Events_skull_collected)
+	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
+
 func spawn_enemy():
-	var new_enemy = CRUSADER.instantiate()
+	print(MOBS.size())
+	var new_enemy = MOBS.pick_random().instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
 	new_enemy.player = player
 	add_child(new_enemy)
+	
+	if need_skulls == true:
+		var chance = randf()
+		if chance < 0.5:
+			var new_skull = SKULL.instantiate()
+			%PathFollow2D.progress_ratio = randf()
+			new_skull.global_position = %PathFollow2D.global_position
+			add_child(new_skull)
 
 var direction = Vector2(0, 1)
 
@@ -28,3 +44,13 @@ func _process(delta):
 func _on_timer_timeout():
 	if player != null:
 		spawn_enemy()
+
+func _on_Events_skulls_lost():
+	need_skulls = true
+
+func _on_Events_skull_collected():
+	need_skulls = false
+	
+func _on_Events_LEVEL_FIRST():
+	print("AAAAAAAA")
+	MOBS.append(CRUSADER)

@@ -9,6 +9,7 @@ const SCENES = {
 }
 
 var kills = 0
+var skull_rate = 3
 
 func _ready():
 	Events.connect("enemy_killed", on_Events_enemy_killed)
@@ -18,3 +19,6 @@ func set_scene(scene_name: String):
 
 func on_Events_enemy_killed():
 	kills += 1
+	
+func can_spawn_skull():
+	return kills % skull_rate == 0
