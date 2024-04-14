@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bq5s7i3x1g2di" path="res://assets/temp/ani8.png" id="15_4b5mf"]
 [ext_resource type="Texture2D" uid="uid://xxr6wia371rv" path="res://assets/temp/ani9.png" id="16_qp8dp"]
 [ext_resource type="Texture2D" uid="uid://bj0tpborkktct" path="res://assets/temp/ani10.png" id="17_xh27m"]
-[ext_resource type="AudioStream" uid="uid://bojv4knrn6an2" path="res://assets/game over.mp3" id="19_spgqy"]
+[ext_resource type="AudioStream" uid="uid://dl8eo3dxsg8j3" path="res://assets/music/3_end.wav" id="20_pk7b3"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_50jjb"]
 
@@ -119,7 +119,7 @@ expand_mode = 1
 flip_h = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("19_spgqy")
+stream = ExtResource("20_pk7b3")
 volume_db = -5.0
 
 [node name="BtnPlay" type="Button" parent="."]

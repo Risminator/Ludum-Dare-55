@@ -6,6 +6,8 @@ extends Node
 @onready var game_over_menu = $CanvasLayer
 @onready var dash_tip = $CanvasLayer2
 
+@onready var music1 = $Player/AudioStreamPlayer2D2
+@onready var music2 = $Player/AudioStreamPlayer2D3
 
 var scroll_direction = Vector2(0, 1)
 
@@ -65,6 +67,8 @@ func _on_timer_timeout():
 func _on_Events_start_game():
 	can_spawn = true
 	cameraRemote.update_position = true
+	music1.playing = false
+	music2.playing = true
 
 func _on_Events_skulls_lost():
 	need_skulls = true

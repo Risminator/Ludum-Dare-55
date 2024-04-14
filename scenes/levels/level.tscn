@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdyu15csyydvg"]
+[gd_scene load_steps=12 format=3 uid="uid://cdyu15csyydvg"]
 
 [ext_resource type="PackedScene" uid="uid://bj6u3bignl25" path="res://scenes/player/player.tscn" id="1_omn7p"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_r5kd6"]
 [ext_resource type="PackedScene" uid="uid://cpvm2l4fpwxqn" path="res://scenes/skull_collectible.tscn" id="3_f4pg5"]
 [ext_resource type="Texture2D" uid="uid://bxq3pxd3jguws" path="res://assets/pol.png" id="3_kx5p2"]
+[ext_resource type="AudioStream" uid="uid://dt24v52qpk65r" path="res://assets/music/1_loop.wav" id="4_00m8b"]
 [ext_resource type="Texture2D" uid="uid://b5o026m42l52n" path="res://assets/particles.png" id="5_1rlc6"]
-[ext_resource type="AudioStream" uid="uid://cftyuq8d04kqg" path="res://assets/Truth of the Legend.mp3" id="5_pxkg5"]
+[ext_resource type="AudioStream" uid="uid://ico0eiffglxy" path="res://assets/music/2.wav" id="5_8ahmf"]
 [ext_resource type="PackedScene" uid="uid://j5c7qsa1srb" path="res://scenes/menus/game_over.tscn" id="7_yl48w"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k45cr"]
@@ -57,6 +58,16 @@ remote_path = NodePath("../../Path2D")
 update_rotation = false
 update_scale = false
 
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-326, -174)
+stream = ExtResource("4_00m8b")
+autoplay = true
+attenuation = 0.659754
+panning_strength = 1.28
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("5_8ahmf")
+
 [node name="SkullCollectible" parent="." instance=ExtResource("3_f4pg5")]
 position = Vector2(174, 216)
 time_to_live = 0
@@ -85,12 +96,6 @@ curve = SubResource("Curve2D_e7x1q")
 unique_name_in_owner = true
 position = Vector2(-545, -368)
 rotation = -0.00440914
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_pxkg5")
-autoplay = true
-attenuation = 0.659754
-panning_strength = 1.28
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 2
