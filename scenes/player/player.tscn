@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bj6u3bignl25"]
+[gd_scene load_steps=14 format=3 uid="uid://bj6u3bignl25"]
 
-[ext_resource type="Texture2D" uid="uid://y7pm5w5ap6fl" path="res://assets/character.png" id="1_4r51u"]
+[ext_resource type="Texture2D" uid="uid://biyi01ntewb5l" path="res://assets/character.png" id="1_4r51u"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_emhx0"]
 [ext_resource type="Script" path="res://scripts/player/Summons.gd" id="2_0dusb"]
 [ext_resource type="PackedScene" uid="uid://rdsjai3y0dqq" path="res://scenes/player/summon_point.tscn" id="2_wu4ca"]
-[ext_resource type="Texture2D" uid="uid://chxgl5mmvsv7p" path="res://assets/light.png" id="3_huawc"]
-[ext_resource type="Texture2D" uid="uid://dnyiuvy6cvsfc" path="res://assets/circle.png" id="5_bn4cn"]
-[ext_resource type="Texture2D" uid="uid://b5o026m42l52n" path="res://assets/particles.png" id="5_nmird"]
+[ext_resource type="Texture2D" uid="uid://dfi6jmu7qnect" path="res://assets/light.png" id="3_huawc"]
+[ext_resource type="Texture2D" uid="uid://bocmcnm4j4e3e" path="res://assets/circle.png" id="5_bn4cn"]
+[ext_resource type="Texture2D" uid="uid://dgyv7di2mf4ek" path="res://assets/particles.png" id="5_nmird"]
+[ext_resource type="AudioStream" uid="uid://b07h0c05s811m" path="res://assets/Truth of the Legend.mp3" id="8_ybwrg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aufn0"]
 radius = 13.0
@@ -178,5 +179,8 @@ collision_mask = 20
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 modulate = Color(0.662745, 0.0196078, 0, 1)
 shape = SubResource("CapsuleShape2D_aufn0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ybwrg")
 
 [connection signal="ritual_ready" from="Summons" to="." method="_on_summons_ritual_ready"]
