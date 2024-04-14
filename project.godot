@@ -43,6 +43,7 @@ version_control/autoload_on_startup=true
 2d_physics/layer_2="Familiars"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Collectibles"
+2d_physics/layer_5="enemy_attacks"
 
 [rendering]
 

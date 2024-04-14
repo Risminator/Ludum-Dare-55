@@ -1,16 +1,24 @@
 extends CharacterBody2D
 
 var player = null
-@export var speed = 200
+@export var speed = 50
 
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var attack_center: Area2D = $AttackCenter
+@onready var attack_hitbox: CollisionPolygon2D = $AttackCenter/CollisionPolygon2D
 
+var dash_speed = 400
+var dashing = false
+
+func _ready():
+	$AttackTimer.start()
 
 func attack():
 	animation.play("swipe")
 	attack_center.look_at(player.position)
 	attack_center.visible = true
+	attack_hitbox.disabled = false
+	dashing = true
 	
 
 func die():
@@ -31,10 +39,13 @@ func _physics_process(delta):
 			$Sprite2D.flip_h = false
 			
 		var direction = global_position.direction_to(player.global_position)
-		velocity = direction * speed
+		if dashing:
+			velocity = direction * dash_speed
+		else:
+			velocity = direction * speed
 		move_and_slide()
 		
-	var overlapping_hazards = %HurtBox.get_overlapping_bodies()
+	var overlapping_hazards = %HurtBox.get_overlapping_areas()
 	for body in overlapping_hazards:
 		if body.has_node("player_weapon"):
 			die()
@@ -48,3 +59,6 @@ func _on_timer_timeout():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "swipe":
 		attack_center.visible = false
+		attack_hitbox.disabled = true
+	dashing = false
+	$AttackTimer.start()

@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://j3xdogar7st8"]
+[gd_scene load_steps=4 format=3 uid="uid://j3xdogar7st8"]
 
-[ext_resource type="Texture2D" uid="uid://bkvm1c32o67t3" path="res://assets/familiar2.png" id="1_2nxwa"]
+[ext_resource type="Texture2D" uid="uid://b7p87j5e02nhf" path="res://assets/familiar2.png" id="1_2nxwa"]
+[ext_resource type="Script" path="res://scripts/player/familiar.gd" id="1_m54d2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y61kv"]
 radius = 25.02
 
-[node name="Area2D" type="CharacterBody2D"]
+[node name="Familiar" type="Area2D"]
 scale = Vector2(0.8, 0.8)
 collision_layer = 2
-collision_mask = 0
+collision_mask = 16
+script = ExtResource("1_m54d2")
 
-[node name="Familiar" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -3)
 texture = ExtResource("1_2nxwa")

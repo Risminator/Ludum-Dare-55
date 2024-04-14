@@ -6,7 +6,7 @@
 
 [sub_resource type="Animation" id="Animation_iuels"]
 resource_name = "swipe"
-length = 0.5
+length = 0.3
 step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -26,8 +26,8 @@ _data = {
 "swipe": SubResource("Animation_iuels")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lsg6g"]
-height = 48.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_58n1h"]
+height = 50.0
 
 [node name="Crusader" type="CharacterBody2D"]
 texture_filter = 1
@@ -36,7 +36,7 @@ collision_mask = 0
 script = ExtResource("1_k7bas")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-8, -3)
+position = Vector2(0, -9)
 texture = ExtResource("1_lsuym")
 hframes = 3
 frame = 2
@@ -46,8 +46,8 @@ libraries = {
 "": SubResource("AnimationLibrary_usi66")
 }
 
-[node name="AttackTImer" type="Timer" parent="."]
-autostart = true
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="HurtBox" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -55,17 +55,26 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CapsuleShape2D_lsg6g")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_lsg6g")
+shape = SubResource("CapsuleShape2D_58n1h")
 
 [node name="AttackCenter" type="Area2D" parent="."]
+collision_layer = 20
+collision_mask = 3
 
 [node name="Attack" type="Sprite2D" parent="AttackCenter"]
-position = Vector2(75, 0)
+position = Vector2(32, 0)
 texture = ExtResource("3_giu4l")
 flip_h = true
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackCenter"]
+position = Vector2(-43, 0)
+polygon = PackedVector2Array(35, -50, 56, -44, 73, -32, 86, -14, 87, 0, 83, 21, 73, 39, 62, 48, 78, 50, 97, 43, 114, 22, 116, -5, 110, -24, 97, -38, 78, -47, 54, -50)
+disabled = true
+
+[node name="enemy_weapon" type="Node" parent="AttackCenter"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_58n1h")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="timeout" from="AttackTImer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_timer_timeout"]

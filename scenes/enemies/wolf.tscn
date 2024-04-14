@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://8kbxgl72wi26"]
 
-[ext_resource type="Script" path="res://scripts/wolf.gd" id="1_xvqsp"]
-[ext_resource type="Texture2D" uid="uid://cevkaih5adrj7" path="res://assets/wolf.png" id="2_rw64t"]
+[ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_6ysjt"]
+[ext_resource type="Texture2D" uid="uid://5362t88b6o7u" path="res://assets/wolf.png" id="2_rw64t"]
 
 [sub_resource type="Animation" id="Animation_ltbq6"]
 resource_name = "new_animation"
@@ -35,8 +35,8 @@ height = 46.0
 [node name="Wolf" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 4
-script = ExtResource("1_xvqsp")
-speed = 100
+collision_mask = 0
+script = ExtResource("1_6ysjt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2, -1)

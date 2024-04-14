@@ -1,8 +1,14 @@
 extends Node
 
 signal skull_collected
-signal familiar_lost(position)
+signal familiar_lost(familiar)
 signal enemy_killed
+
+signal LEVEL_FIRST
+signal LEVEL_SECOND
+signal LEVEL_THIRD
+signal LEVEL_FOURTH
+signal LEVEL_FIFTH
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
