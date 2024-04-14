@@ -15,7 +15,7 @@ const WOLF = preload("res://scenes/enemies/wolf.tscn")
 const CRUSADER = preload("res://scenes/enemies/crusader.tscn")
 const SKULL = preload("res://scenes/skull_collectible.tscn")
 
-var max_mobs = 1
+var max_mobs = 10
 
 var spawned_mobs = 0
 

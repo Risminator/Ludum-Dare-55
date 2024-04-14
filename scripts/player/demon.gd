@@ -18,16 +18,19 @@ func _physics_process(delta):
 func level_up():
 	level += 1
 	if level <= 5:
-		sprite.frame = level
+		sprite.frame = level - 1
 	match level:
 		1:
 			Events.LEVEL_FIRST.emit()
 		2:
 			Events.LEVEL_SECOND.emit()
+			#var tween = create_tween()
+			#tween.tween_property(sprite, "scale", Vector2(20, 20), 5)
 		3:
 			Events.LEVEL_THIRD.emit()
 		4:
 			Events.LEVEL_FOURTH.emit()
 		5:
 			Events.LEVEL_FIFTH.emit()
+			
 	scale += Vector2(0.2, 0.2)

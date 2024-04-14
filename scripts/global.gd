@@ -33,4 +33,4 @@ func can_spawn_skull():
 func reset():
 	kills = 0
 	skulls_collected = 0
-	skull_rate = 3
+	skull_rate = 1

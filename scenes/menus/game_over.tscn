@@ -119,8 +119,10 @@ expand_mode = 1
 flip_h = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+process_mode = 2
 stream = ExtResource("20_pk7b3")
 volume_db = -5.0
+autoplay = true
 
 [node name="BtnPlay" type="Button" parent="."]
 texture_filter = 1
