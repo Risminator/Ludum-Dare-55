@@ -5,6 +5,7 @@ signal skulls_lost
 signal familiar_lost(familiar)
 signal enemy_killed
 signal start_game
+signal game_over
 
 signal LEVEL_FIRST
 signal LEVEL_SECOND

@@ -8,9 +8,12 @@ var player = null
 @onready var attack_hitbox: CollisionPolygon2D = $AttackCenter/CollisionPolygon2D
 
 var direction
+var can_drop_skulls = true
+
 @export var dashing = false
 
 func _ready():
+	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
 	$AttackTimer.start()
 
 func lock_on():
@@ -21,6 +24,7 @@ func lock_on():
 		direction = Vector2(0, 0)
 
 func attack():
+	animation.stop()
 	animation.play("swipe")
 	#attack_center.look_at(player.position)
 	#attack_center.visible = true
@@ -31,7 +35,7 @@ func attack():
 func die():
 	queue_free()
 	Events.enemy_killed.emit()
-	if Global.can_spawn_skull():
+	if Global.can_spawn_skull() and can_drop_skulls:
 		const SKULL = preload("res://scenes/skull_collectible.tscn")
 		var new_skull = SKULL.instantiate()
 		new_skull.global_position = global_position
@@ -63,7 +67,11 @@ func _on_timer_timeout():
 
 
 func _on_animation_player_animation_finished(anim_name):
-	#if anim_name == "swipe":
+	if anim_name == "swipe":
+		$AttackTimer.start()
+		animation.play("idle")
 	#	attack_center.visible = false
 	#	attack_hitbox.disabled = true
-	$AttackTimer.start()
+	
+func _on_Events_LEVEL_FIRST():
+	can_drop_skulls = false

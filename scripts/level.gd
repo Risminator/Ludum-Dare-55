@@ -4,9 +4,15 @@ extends Node
 @onready var parallax = $ParallaxBackground
 @onready var cameraRemote = $Player/RemoteTransform2D
 
+var scroll_direction = Vector2(0, 1)
+
 const WOLF = preload("res://scenes/enemies/wolf.tscn")	
 const CRUSADER = preload("res://scenes/enemies/crusader.tscn")
 const SKULL = preload("res://scenes/skull_collectible.tscn")
+
+var max_mobs = 1
+
+var spawned_mobs = 0
 
 var MOBS = [
 	WOLF
@@ -19,34 +25,37 @@ func _ready():
 	Events.connect("start_game", _on_Events_start_game)
 	Events.connect("skulls_lost", _on_Events_skulls_lost)
 	Events.connect("skull_collected", _on_Events_skull_collected)
+	Events.connect("enemy_killed", _on_Events_enemy_killed)
 	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
+	Events.connect("game_over", _on_Events_game_over)
 
 func spawn_enemy():
-	print(MOBS.size())
 	var new_enemy = MOBS.pick_random().instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
 	new_enemy.player = player
+	spawned_mobs += 1
 	add_child(new_enemy)
-	
-	if need_skulls == true:
-		var chance = randf()
-		if chance < 0.5:
-			var new_skull = SKULL.instantiate()
-			%PathFollow2D.progress_ratio = randf()
-			new_skull.global_position = %PathFollow2D.global_position
-			add_child(new_skull)
 
-var direction = Vector2(0, 1)
+func spawn_skull():
+	var chance = randf()
+	if chance < 0.5:
+		var new_skull = SKULL.instantiate()
+		%PathFollow2D.progress_ratio = randf()
+		new_skull.global_position = %PathFollow2D.global_position
+		add_child(new_skull)
+
 
 func _process(delta):
-	#var direction = player.velocity
+	#var scroll_direction = player.velocity
 	if player != null:
-		parallax.scroll_offset += direction * player.speed * delta
+		parallax.scroll_offset += scroll_direction * player.speed * delta
 
 func _on_timer_timeout():
-	if can_spawn and player != null:
+	if can_spawn and player != null and spawned_mobs <= max_mobs:
 		spawn_enemy()
+	if can_spawn and need_skulls == true:
+		spawn_skull()
 
 func _on_Events_start_game():
 	can_spawn = true
@@ -59,5 +68,12 @@ func _on_Events_skull_collected():
 	need_skulls = false
 	
 func _on_Events_LEVEL_FIRST():
-	print("AAAAAAAA")
 	MOBS.append(CRUSADER)
+	max_mobs += 5
+	
+func _on_Events_game_over():
+	can_spawn = false
+	cameraRemote.update_position = false
+	
+func _on_Events_enemy_killed():
+	spawned_mobs -= 1

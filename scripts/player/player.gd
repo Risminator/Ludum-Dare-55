@@ -13,7 +13,6 @@ func level_up():
 		var new_demon = DEMON.instantiate()
 		new_demon.master = self
 		new_demon.global_position = global_position
-		print(new_demon.name)
 		add_child(new_demon)
 		demon = new_demon
 	demon.level_up()
@@ -40,6 +39,7 @@ func _physics_process(delta):
 	var overlapping_hazards = %HurtBox.get_overlapping_areas()
 	if overlapping_hazards.size() > 0:
 		queue_free()
+		Events.game_over.emit()
 
 
 func _on_summons_ritual_ready():
@@ -49,3 +49,4 @@ func _on_summons_ritual_ready():
 	
 func _on_Events_LEVEL_FIRST():
 	rotation_rate += 0.01
+	speed += 50

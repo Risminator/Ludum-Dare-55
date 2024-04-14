@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://6ub8g0eg222s"]
+[gd_scene load_steps=8 format=3 uid="uid://6ub8g0eg222s"]
 
 [ext_resource type="Script" path="res://scripts/enemies/crusader.gd" id="1_k7bas"]
 [ext_resource type="Texture2D" uid="uid://dvwvaorkequih" path="res://assets/crusader.png" id="1_lsuym"]
@@ -6,7 +6,7 @@
 
 [sub_resource type="Animation" id="Animation_iuels"]
 resource_name = "swipe"
-length = 2.0
+length = 1.21
 step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -15,7 +15,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.3, 1.98),
+"times": PackedFloat32Array(0, 0.05, 0.4, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 0]
@@ -27,7 +27,7 @@ tracks/1/path = NodePath("AttackCenter/CollisionPolygon2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.7),
+"times": PackedFloat32Array(0, 0.4, 0.54),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -39,7 +39,7 @@ tracks/2/path = NodePath("AttackCenter:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.7),
+"times": PackedFloat32Array(0, 0.4, 0.54),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -51,10 +51,10 @@ tracks/3/path = NodePath(".:speed")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.14, 0.28, 0.3, 0.7, 1.98, 2),
+"times": PackedFloat32Array(0, 0.12, 0.14, 0.38, 0.4, 0.52, 1.18, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [200, 200, 0, 0, 600, 0, 0, 200]
+"values": [200, 200, 0, 0, 700, 0, 0, 200]
 }
 tracks/4/type = "method"
 tracks/4/imported = false
@@ -77,14 +77,45 @@ tracks/5/path = NodePath(".:dashing")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.7),
+"times": PackedFloat32Array(0, 0.51, 0.52),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.12, 0.4, 0.51),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.411765, 0.0156863, 1, 0.290196), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ptcdk"]
+resource_name = "idle"
+length = 0.3
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_usi66"]
 _data = {
+"idle": SubResource("Animation_ptcdk"),
 "swipe": SubResource("Animation_iuels")
 }
 
@@ -102,12 +133,13 @@ position = Vector2(0, -9)
 texture = ExtResource("1_lsuym")
 flip_h = true
 hframes = 3
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_usi66")
 }
-autoplay = "swipe"
+autoplay = "idle"
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -118,6 +150,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+visible = false
 shape = SubResource("CapsuleShape2D_58n1h")
 
 [node name="AttackCenter" type="Area2D" parent="."]
@@ -138,6 +171,7 @@ disabled = true
 [node name="enemy_weapon" type="Node" parent="AttackCenter"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_58n1h")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

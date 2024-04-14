@@ -17,7 +17,6 @@ func add_familiar():
 				var new_familiar = FAMILIAR.instantiate()
 				slot.add_child(new_familiar)
 				break
-		print(familiars)
 
 func lose_familiar(familiar):
 	var slot = familiar.get_parent()

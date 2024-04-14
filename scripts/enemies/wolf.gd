@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed = 250
 
 var player = null
-
+var can_drop_skulls = true
 
 func _ready():
 	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
@@ -11,7 +11,7 @@ func _ready():
 func die():
 	queue_free()
 	Events.enemy_killed.emit()
-	if Global.can_spawn_skull():
+	if Global.can_spawn_skull() and can_drop_skulls:
 		const SKULL = preload("res://scenes/skull_collectible.tscn")
 		var new_skull = SKULL.instantiate()
 		new_skull.global_position = global_position
@@ -35,3 +35,4 @@ func _physics_process(delta):
 
 func _on_Events_LEVEL_FIRST():
 	speed += 75
+	can_drop_skulls = false

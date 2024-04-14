@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Demon
 
 var master
-var speed = 300
+var speed = 400
 var min_distance = 30
 var level = 0
 
