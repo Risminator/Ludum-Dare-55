@@ -174,7 +174,7 @@ texture = ExtResource("5_nmird")
 
 [node name="HurtBox" type="Area2D" parent="."]
 unique_name_in_owner = true
-collision_mask = 20
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 modulate = Color(0.662745, 0.0196078, 0, 1)
@@ -183,4 +183,13 @@ shape = SubResource("CapsuleShape2D_aufn0")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_ybwrg")
 
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="TrailTimer" type="Timer" parent="."]
+wait_time = 0.05
+
 [connection signal="ritual_ready" from="Summons" to="." method="_on_summons_ritual_ready"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="TrailTimer" to="." method="_on_trail_timer_timeout"]

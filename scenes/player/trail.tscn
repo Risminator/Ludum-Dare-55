@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://n1nnbadt53s7"]
+
+[ext_resource type="Texture2D" uid="uid://y7pm5w5ap6fl" path="res://assets/character.png" id="1_iytsp"]
+[ext_resource type="Script" path="res://scripts/trail.gd" id="1_mcxvm"]
+
+[node name="Trail" type="Node2D"]
+top_level = true
+texture_filter = 1
+script = ExtResource("1_mcxvm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.431373, 0.0196078, 0.207843, 0.356863)
+texture = ExtResource("1_iytsp")
+hframes = 3
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

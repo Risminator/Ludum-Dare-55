@@ -45,7 +45,6 @@ centered = false
 
 [node name="Player" parent="." instance=ExtResource("1_omn7p")]
 position = Vector2(326, 174)
-speed = 400
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
