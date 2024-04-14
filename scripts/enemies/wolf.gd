@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
-@export var speed = 325
+@export var speed = 250
 
 var player = null
+
+
+func _ready():
+	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
 
 func die():
 	queue_free()
@@ -28,3 +32,6 @@ func _physics_process(delta):
 	for body in overlapping_hazards:
 		if body.has_node("player_weapon"):
 			die()
+
+func _on_Events_LEVEL_FIRST():
+	speed += 75
