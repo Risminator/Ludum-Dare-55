@@ -94,8 +94,20 @@ panning_strength = 1.28
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 2
+layer = 3
 visible = false
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("7_yl48w")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+process_mode = 1
+visible = false
+
+[node name="Label" type="Label" parent="CanvasLayer2"]
+offset_left = 21.0
+offset_top = 12.0
+offset_right = 231.0
+offset_bottom = 35.0
+text = "Left Mouse Button -> DASH"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

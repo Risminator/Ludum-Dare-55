@@ -4,6 +4,7 @@ extends Node
 @onready var parallax = $ParallaxBackground
 @onready var cameraRemote = $Player/RemoteTransform2D
 @onready var game_over_menu = $CanvasLayer
+@onready var dash_tip = $CanvasLayer2
 
 
 var scroll_direction = Vector2(0, 1)
@@ -30,6 +31,7 @@ func _ready():
 	Events.connect("skull_collected", _on_Events_skull_collected)
 	Events.connect("enemy_killed", _on_Events_enemy_killed)
 	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
+	Events.connect("LEVEL_SECOND", _on_Events_LEVEL_SECOND)
 	Events.connect("game_over", _on_Events_game_over)
 
 func spawn_enemy():
@@ -72,6 +74,10 @@ func _on_Events_skull_collected():
 	
 func _on_Events_LEVEL_FIRST():
 	MOBS.append(CRUSADER)
+	max_mobs += 5
+
+func _on_Events_LEVEL_SECOND():
+	dash_tip.visible = true
 	max_mobs += 5
 	
 func _on_Events_game_over():

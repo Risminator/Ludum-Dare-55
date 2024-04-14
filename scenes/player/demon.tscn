@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://yvy3qjjti7es"]
 
-[ext_resource type="Texture2D" uid="uid://cbj320mfvteeh" path="res://assets/familiar1.png" id="1_1k0ht"]
 [ext_resource type="Script" path="res://scripts/player/demon.gd" id="1_fvsc6"]
+[ext_resource type="Texture2D" uid="uid://c23vgtjpu07ym" path="res://assets/familiar1-Sheet.png" id="2_6s830"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ul6wy"]
 radius = 12.0
@@ -15,7 +15,8 @@ collision_mask = 0
 script = ExtResource("1_fvsc6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_1k0ht")
+texture = ExtResource("2_6s830")
+hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true

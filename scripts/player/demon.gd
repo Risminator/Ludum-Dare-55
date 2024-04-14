@@ -3,10 +3,11 @@ extends CharacterBody2D
 class_name Demon
 
 var master
-var speed = 400
+var speed = 450
 var min_distance = 30
 var level = 0
 
+@onready var sprite = $Sprite2D
 
 func _physics_process(delta):
 	if master != null and global_position.distance_to(master.global_position) >= min_distance:
@@ -16,6 +17,8 @@ func _physics_process(delta):
 
 func level_up():
 	level += 1
+	if level <= 5:
+		sprite.frame = level
 	match level:
 		1:
 			Events.LEVEL_FIRST.emit()
@@ -27,5 +30,4 @@ func level_up():
 			Events.LEVEL_FOURTH.emit()
 		5:
 			Events.LEVEL_FIFTH.emit()
-	scale += Vector2(0.1, 0.1)
-	print("I grew up ", level)
+	scale += Vector2(0.2, 0.2)

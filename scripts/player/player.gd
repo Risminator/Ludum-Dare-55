@@ -12,6 +12,7 @@ var dashing = false
 
 @onready var dash_timer = $DashTimer
 @onready var trail_timer = $TrailTimer
+@onready var animation = $Sprite2D/AnimationPlayer
 
 const TRAIL = preload("res://scenes/player/trail.tscn")
 
@@ -55,8 +56,7 @@ func _physics_process(delta):
 	
 	var overlapping_hazards = %HurtBox.get_overlapping_areas()
 	if overlapping_hazards.size() > 0:
-		queue_free()
-		Events.game_over.emit()
+		animation.play("death")
 
 
 func _on_dash_timer_timeout():
@@ -81,3 +81,9 @@ func _on_trail_timer_timeout():
 	var new_shadow = TRAIL.instantiate()
 	new_shadow.global_position = global_position
 	add_child(new_shadow)
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "death":
+		queue_free()
+		Events.game_over.emit()

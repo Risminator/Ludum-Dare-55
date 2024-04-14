@@ -10,7 +10,7 @@ const SCENES = {
 
 var kills = 0
 var skulls_collected = 0
-var skull_rate = 3
+var skull_rate = 1
 
 func _ready():
 	Events.connect("skull_collected", _on_Events_skull_collected)
