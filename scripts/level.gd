@@ -4,7 +4,11 @@ extends Node
 @onready var parallax = $ParallaxBackground
 @onready var cameraRemote = $Player/RemoteTransform2D
 @onready var game_over_menu = $CanvasLayer
-@onready var dash_tip = $CanvasLayer2
+@onready var dash_tip = $CanvasLayer2/PanelContainer/VBoxContainer/DashTip
+@onready var rotate_tip = $CanvasLayer2/PanelContainer/VBoxContainer/RotateTip
+@onready var speed_tip = $CanvasLayer2/PanelContainer/VBoxContainer/SpeedLabel
+@onready var radius_tip = $CanvasLayer2/PanelContainer/VBoxContainer/RadiusLabel
+@onready var unkillable_tip = $CanvasLayer2/PanelContainer/VBoxContainer/UnkillableTip
 
 @onready var music1 = $Player/AudioStreamPlayer2D2
 @onready var music2 = $Player/AudioStreamPlayer2D3
@@ -15,7 +19,7 @@ const WOLF = preload("res://scenes/enemies/wolf.tscn")
 const CRUSADER = preload("res://scenes/enemies/crusader.tscn")
 const SKULL = preload("res://scenes/skull_collectible.tscn")
 
-var max_mobs = 10
+var max_mobs = 3
 
 var spawned_mobs = 0
 
@@ -29,12 +33,17 @@ var can_spawn = false
 
 func _ready():
 	Events.connect("start_game", _on_Events_start_game)
+	Events.connect("game_over", _on_Events_game_over)
+	
 	Events.connect("skulls_lost", _on_Events_skulls_lost)
 	Events.connect("skull_collected", _on_Events_skull_collected)
 	Events.connect("enemy_killed", _on_Events_enemy_killed)
+	
 	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
 	Events.connect("LEVEL_SECOND", _on_Events_LEVEL_SECOND)
-	Events.connect("game_over", _on_Events_game_over)
+	Events.connect("LEVEL_THIRD", _on_Events_LEVEL_THIRD)
+	Events.connect("LEVEL_FOURTH", _on_Events_LEVEL_FOURTH)
+	Events.connect("LEVEL_FIFTH", _on_Events_LEVEL_FIFTH)
 
 func spawn_enemy():
 	var new_enemy = MOBS.pick_random().instantiate()
@@ -77,13 +86,28 @@ func _on_Events_skull_collected():
 	need_skulls = false
 	
 func _on_Events_LEVEL_FIRST():
-	MOBS.append(CRUSADER)
-	max_mobs += 5
+	max_mobs = 8
 	Global.skull_rate = 2
+	speed_tip.visible = true
 
 func _on_Events_LEVEL_SECOND():
+	MOBS.append(CRUSADER)
 	dash_tip.visible = true
-	max_mobs += 5
+
+func _on_Events_LEVEL_THIRD():
+	MOBS.append(CRUSADER)
+	MOBS.append(CRUSADER)
+	Global.skull_rate = 3
+	radius_tip.visible = true
+
+func _on_Events_LEVEL_FOURTH():
+	Global.skull_rate = 4
+	rotate_tip.visible = true
+
+func _on_Events_LEVEL_FIFTH():
+	Global.skull_rate = 6
+	max_mobs = 15
+	unkillable_tip.visible = true
 	
 func _on_Events_game_over():
 	can_spawn = false

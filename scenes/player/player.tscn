@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_emhx0"]
 [ext_resource type="Script" path="res://scripts/player/Summons.gd" id="2_0dusb"]
 [ext_resource type="PackedScene" uid="uid://rdsjai3y0dqq" path="res://scenes/player/summon_point.tscn" id="2_wu4ca"]
-[ext_resource type="Texture2D" uid="uid://chxgl5mmvsv7p" path="res://assets/light.png" id="3_huawc"]
-[ext_resource type="Texture2D" uid="uid://dnyiuvy6cvsfc" path="res://assets/circle.png" id="5_bn4cn"]
-[ext_resource type="Texture2D" uid="uid://b5o026m42l52n" path="res://assets/particles.png" id="5_nmird"]
-[ext_resource type="Texture2D" uid="uid://dytc71lucv8t8" path="res://assets/death.png" id="6_gbqso"]
-[ext_resource type="AudioStream" uid="uid://cftyuq8d04kqg" path="res://assets/Truth of the Legend.mp3" id="8_ybwrg"]
+[ext_resource type="Texture2D" uid="uid://ctgxu1s86pt7d" path="res://assets/light.png" id="3_huawc"]
+[ext_resource type="Texture2D" uid="uid://c23x5j04l530j" path="res://assets/circle.png" id="5_bn4cn"]
+[ext_resource type="Texture2D" uid="uid://bb3o01pm1tefx" path="res://assets/particles.png" id="5_nmird"]
+[ext_resource type="Texture2D" uid="uid://c6rcdyfnb43kv" path="res://assets/death.png" id="6_gbqso"]
+[ext_resource type="AudioStream" uid="uid://bltid5k7q8eu0" path="res://assets/Truth of the Legend.mp3" id="8_ybwrg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aufn0"]
 radius = 13.0
@@ -198,7 +198,6 @@ position = Vector2(-17.97, 0)
 texture = ExtResource("6_gbqso")
 hframes = 10
 vframes = 2
-frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -230,10 +229,24 @@ stream = ExtResource("8_ybwrg")
 wait_time = 0.3
 one_shot = true
 
+[node name="DashCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="TrailTimer" type="Timer" parent="."]
 wait_time = 0.05
 
-[connection signal="ritual_ready" from="Summons" to="." method="_on_summons_ritual_ready"]
+[node name="RotateTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[node name="RotateCooldown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="TrailTimer" to="." method="_on_trail_timer_timeout"]
+[connection signal="timeout" from="RotateTimer" to="." method="_on_rotate_timer_timeout"]
+[connection signal="timeout" from="RotateCooldown" to="." method="_on_rotate_cooldown_timeout"]

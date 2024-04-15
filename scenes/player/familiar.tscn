@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://j3xdogar7st8"]
 
 [ext_resource type="Script" path="res://scripts/player/familiar.gd" id="1_m54d2"]
-[ext_resource type="Texture2D" uid="uid://dundntdlyqi71" path="res://assets/spike.png" id="2_yybcs"]
-[ext_resource type="Texture2D" uid="uid://bytqxxdyvodj" path="res://assets/fire.png" id="3_ii0cn"]
+[ext_resource type="Texture2D" uid="uid://bvo8kebv1870i" path="res://assets/spike.png" id="2_yybcs"]
+[ext_resource type="Texture2D" uid="uid://cw5xinmhfqd56" path="res://assets/fire.png" id="3_ii0cn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y61kv"]
 radius = 25.02
@@ -48,7 +48,6 @@ collision_mask = 16
 script = ExtResource("1_m54d2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 position = Vector2(0, -2.38419e-07)
 texture = ExtResource("2_yybcs")

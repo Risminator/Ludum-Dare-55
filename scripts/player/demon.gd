@@ -19,12 +19,13 @@ func level_up():
 	level += 1
 	if level <= 5:
 		sprite.frame = level - 1
+	Events.LEVEL_UP.emit()
 	match level:
 		1:
 			Events.LEVEL_FIRST.emit()
 		2:
 			Events.LEVEL_SECOND.emit()
-			#var tween = create_tween()
+			#var tween = create_tween()*
 			#tween.tween_property(sprite, "scale", Vector2(20, 20), 5)
 		3:
 			Events.LEVEL_THIRD.emit()
@@ -32,5 +33,11 @@ func level_up():
 			Events.LEVEL_FOURTH.emit()
 		5:
 			Events.LEVEL_FIFTH.emit()
+		_:
+			get_tree().paused = true
+			z_index = 5
+			var tween = create_tween()
+			tween.tween_property(self, "scale", Vector2(32, 32), 3)
+			tween.tween_callback(Global.finish_game)
 			
-	scale += Vector2(0.2, 0.2)
+	scale += Vector2(0.05, 0.05)

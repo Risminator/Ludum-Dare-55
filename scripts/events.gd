@@ -6,7 +6,9 @@ signal familiar_lost(familiar)
 signal enemy_killed
 signal start_game
 signal game_over
+signal ritual_ready
 
+signal LEVEL_UP
 signal LEVEL_FIRST
 signal LEVEL_SECOND
 signal LEVEL_THIRD

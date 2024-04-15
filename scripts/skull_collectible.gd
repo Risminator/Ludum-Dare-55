@@ -4,6 +4,7 @@ extends Area2D
 @onready var timer: Timer = $Lifetime
 
 func _ready():
+	Events.connect("LEVEL_UP", _on_Events_LEVEL_UP)
 	if time_to_live > 0:
 		timer.wait_time = time_to_live
 		timer.start()
@@ -21,4 +22,7 @@ func _on_body_entered(body):
 
 
 func _on_lifetime_timeout():
+	queue_free()
+
+func _on_Events_LEVEL_UP():
 	queue_free()

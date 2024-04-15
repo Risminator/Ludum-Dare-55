@@ -1,14 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://yvy3qjjti7es"]
 
 [ext_resource type="Script" path="res://scripts/player/demon.gd" id="1_fvsc6"]
-[ext_resource type="Texture2D" uid="uid://c23vgtjpu07ym" path="res://assets/familiar1-Sheet.png" id="2_6s830"]
+[ext_resource type="Texture2D" uid="uid://ciu5ip6bf0nu4" path="res://assets/familiar1-Sheet.png" id="2_6s830"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ul6wy"]
 radius = 12.0
 height = 36.0
 
 [node name="Demon" type="CharacterBody2D"]
+process_mode = 3
 top_level = true
+z_index = -1
 texture_filter = 1
 collision_layer = 0
 collision_mask = 0

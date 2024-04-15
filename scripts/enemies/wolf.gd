@@ -7,6 +7,7 @@ var can_drop_skulls = true
 
 func _ready():
 	Events.connect("LEVEL_FIRST", _on_Events_LEVEL_FIRST)
+	Events.connect("LEVEL_SECOND", _on_Events_LEVEL_SECOND)
 
 func die():
 	queue_free()
@@ -35,4 +36,6 @@ func _physics_process(delta):
 
 func _on_Events_LEVEL_FIRST():
 	speed += 75
+
+func _on_Events_LEVEL_SECOND():
 	can_drop_skulls = false

@@ -1,13 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdyu15csyydvg"]
+[gd_scene load_steps=18 format=3 uid="uid://cdyu15csyydvg"]
 
 [ext_resource type="PackedScene" uid="uid://bj6u3bignl25" path="res://scenes/player/player.tscn" id="1_omn7p"]
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_r5kd6"]
 [ext_resource type="PackedScene" uid="uid://cpvm2l4fpwxqn" path="res://scenes/skull_collectible.tscn" id="3_f4pg5"]
-[ext_resource type="Texture2D" uid="uid://bxq3pxd3jguws" path="res://assets/pol.png" id="3_kx5p2"]
-[ext_resource type="AudioStream" uid="uid://dt24v52qpk65r" path="res://assets/music/1_loop.wav" id="4_00m8b"]
-[ext_resource type="Texture2D" uid="uid://b5o026m42l52n" path="res://assets/particles.png" id="5_1rlc6"]
-[ext_resource type="AudioStream" uid="uid://ico0eiffglxy" path="res://assets/music/2.wav" id="5_8ahmf"]
+[ext_resource type="Texture2D" uid="uid://qgnh7ejpagdk" path="res://assets/pol.png" id="3_kx5p2"]
+[ext_resource type="AudioStream" uid="uid://b4k8jyhv3an2g" path="res://assets/music/1_loop.wav" id="4_00m8b"]
+[ext_resource type="Texture2D" uid="uid://bb3o01pm1tefx" path="res://assets/particles.png" id="5_1rlc6"]
+[ext_resource type="AudioStream" uid="uid://b1kn3fyl7sq1r" path="res://assets/music/2.wav" id="5_8ahmf"]
 [ext_resource type="PackedScene" uid="uid://j5c7qsa1srb" path="res://scenes/menus/game_over.tscn" id="7_yl48w"]
+[ext_resource type="Script" path="res://scripts/UI/MoreForAkino.gd" id="9_3mxnc"]
+[ext_resource type="Texture2D" uid="uid://bvo8kebv1870i" path="res://assets/spike.png" id="9_jdxnd"]
+[ext_resource type="Script" path="res://scripts/UI/FamiliarsLabel.gd" id="10_51c5t"]
+[ext_resource type="Texture2D" uid="uid://ciu5ip6bf0nu4" path="res://assets/familiar1-Sheet.png" id="12_x5vbh"]
+[ext_resource type="Script" path="res://scripts/UI/AkinoCount.gd" id="12_xlcdx"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k45cr"]
 particles_animation = true
@@ -28,6 +33,10 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -545, -368, 0, 0, 0, 0, 589, -373, 0, 0, 0, 0, 585, 330, 0, 0, 0, 0, -552, 327, 0, 0, 0, 0, -548, -368)
 }
 point_count = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckcpn"]
+atlas = ExtResource("12_x5vbh")
+region = Rect2(0, 0, 63, 55)
 
 [node name="Level" type="Node"]
 script = ExtResource("1_r5kd6")
@@ -106,13 +115,74 @@ visible = false
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 process_mode = 1
-visible = false
 
-[node name="Label" type="Label" parent="CanvasLayer2"]
-offset_left = 21.0
-offset_top = 12.0
-offset_right = 231.0
-offset_bottom = 35.0
-text = "Left Mouse Button -> DASH"
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2"]
+self_modulate = Color(1, 1, 1, 0.219608)
+texture_filter = 1
+offset_right = 195.0
+offset_bottom = 54.0
+scale = Vector2(0.9, 0.9)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/PanelContainer"]
+layout_mode = 2
+
+[node name="SpikeCount" type="HBoxContainer" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpikeTexture" type="TextureRect" parent="CanvasLayer2/PanelContainer/VBoxContainer/SpikeCount"]
+layout_mode = 2
+texture = ExtResource("9_jdxnd")
+stretch_mode = 3
+
+[node name="FamiliarsLabel" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer/SpikeCount"]
+layout_mode = 2
+text = "0 / 5"
+script = ExtResource("10_51c5t")
+
+[node name="AkinoCount" type="HBoxContainer" parent="CanvasLayer2/PanelContainer/VBoxContainer/SpikeCount"]
+visible = false
+layout_mode = 2
+script = ExtResource("12_xlcdx")
+
+[node name="AkinoTexture" type="TextureRect" parent="CanvasLayer2/PanelContainer/VBoxContainer/SpikeCount/AkinoCount"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ckcpn")
+
+[node name="AkinoLabel" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer/SpikeCount/AkinoCount"]
+layout_mode = 2
+text = "0 / 5"
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "+SPEED"
+
+[node name="RadiusLabel" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "+RADIUS"
+
+[node name="DashTip" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "LMB: DASH (2s)
+"
+
+[node name="RotateTip" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "RMB: ROTATE (3s)"
+
+[node name="UnkillableTip" type="Label" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Familiars are immortal!"
+
+[node name="MoreForAkino" type="RichTextLabel" parent="CanvasLayer2/PanelContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = " "
+fit_content = true
+script = ExtResource("9_3mxnc")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

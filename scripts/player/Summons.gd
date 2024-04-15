@@ -1,18 +1,15 @@
 extends Marker2D
 
-signal ritual_ready
-
 @onready var summon_points = get_children()
-var familiars = 0
 
 func add_familiar():
-	if familiars == 5:
-		ritual_ready.emit()
+	if Global.familiars == 5:
+		Events.ritual_ready.emit()
 	else:
 		for slot: Marker2D in summon_points:
 			if slot.is_free:
 				slot.is_free = false
-				familiars += 1
+				Global.familiars += 1
 				const FAMILIAR = preload("res://scenes/player/familiar.tscn")
 				var new_familiar = FAMILIAR.instantiate()
 				slot.add_child(new_familiar)
@@ -24,8 +21,8 @@ func lose_familiar(familiar):
 		slot.remove_child(familiar)
 		familiar.queue_free()
 		slot.is_free = true
-		familiars -= 1
-		if familiars == 0:
+		Global.familiars -= 1
+		if Global.familiars == 0:
 			Events.skulls_lost.emit()
 		
 func clear_familiars():
@@ -34,7 +31,7 @@ func clear_familiars():
 			slot.remove_child(n)
 			n.queue_free()
 		slot.is_free = true
-	familiars = 0
+	Global.familiars = 0
 		
 
 func _ready():

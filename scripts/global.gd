@@ -12,6 +12,8 @@ var kills = 0
 var skulls_collected = 0
 var skull_rate = 1
 
+var familiars = 0
+
 func _ready():
 	Events.connect("skull_collected", _on_Events_skull_collected)
 	Events.connect("enemy_killed", _on_Events_enemy_killed)
@@ -34,3 +36,7 @@ func reset():
 	kills = 0
 	skulls_collected = 0
 	skull_rate = 1
+	familiars = 0
+
+func finish_game():
+	set_scene(SCENES.ENDING)
