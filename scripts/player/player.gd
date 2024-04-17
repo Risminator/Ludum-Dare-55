@@ -24,6 +24,7 @@ var rotation_bonus = 0
 @onready var particles = $Sprite2D/GPUParticles2D
 @onready var summons = $Summons
 @onready var circle = $Circle
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 @export var is_controllable = true
 
@@ -71,8 +72,9 @@ func _physics_process(delta):
 			dash_timer.start()
 			can_dash = false
 		
-		if abs(mouse_pos - position) > Vector2(norm,norm):
-			var direction = (mouse_pos - position).normalized()
+		
+		if (mouse_pos - collision.global_position).length() > Vector2(norm,norm).length():
+			var direction = (mouse_pos - collision.global_position).normalized()
 			if dashing:
 				velocity = direction * dash_speed
 			else:

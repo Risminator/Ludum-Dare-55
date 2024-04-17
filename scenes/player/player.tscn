@@ -9,10 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c6rcdyfnb43kv" path="res://assets/death.png" id="6_gbqso"]
 [ext_resource type="AudioStream" uid="uid://bltid5k7q8eu0" path="res://assets/Truth of the Legend.mp3" id="8_ybwrg"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aufn0"]
-radius = 13.0
-height = 80.0
-
 [sub_resource type="Animation" id="Animation_k1ud4"]
 resource_name = "death"
 length = 1.01
@@ -88,6 +84,10 @@ emission_box_extents = Vector3(15, 1, 1)
 gravity = Vector3(0, -20, 0)
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aufn0"]
+radius = 13.0
+height = 80.0
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
@@ -166,9 +166,6 @@ remote_path = NodePath("../../../Summons/SummonPoint5")
 update_rotation = false
 update_scale = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_aufn0")
-
 [node name="Summons" type="Marker2D" parent="."]
 unique_name_in_owner = true
 z_index = 1
@@ -213,6 +210,9 @@ scale = Vector2(0.7, 0.7)
 amount_ratio = 0.3
 process_material = SubResource("ParticleProcessMaterial_x66db")
 texture = ExtResource("5_nmird")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_aufn0")
 
 [node name="HurtBox" type="Area2D" parent="."]
 unique_name_in_owner = true
