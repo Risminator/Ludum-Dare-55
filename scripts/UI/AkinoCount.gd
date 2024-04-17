@@ -14,6 +14,7 @@ func _ready():
 
 func _on_Events_LEVEL_FIRST():
 	akino_label.text = "1 / 5"
+	akino_texture.texture.region.position = Vector2(0, 0)
 	visible = true
 
 func _on_Events_LEVEL_SECOND():
